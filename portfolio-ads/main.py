@@ -1,3 +1,4 @@
+import time
 produtos = {}
 
 def cadastrar_produto(): #função de cadastramento de produtos.
@@ -13,18 +14,20 @@ def cadastrar_produto(): #função de cadastramento de produtos.
         "quantidade" : quantidade,
         "localizacao" : localizacao
     }
+    print('Cadastrando produto, aguarde!')
+    time.sleep(1)
     print('Produto Cadastrado com sucesso!')
 
-    def demonstrar_produtos(): #função de desmontrar lista de produtos
-        if not produtos: 
-            print("Nenhum produto cadastrado!")
-            return
-        for codigo, dados in produtos.itens():  
-            print(f'\nCódigo: {codigo}')
-            print(f'Nome: {dados['nome']}')
-            print(f'preco: {dados['preco']}')
-            print(f'quantidade: {dados['quantidade']}')
-            print(f'localizacao: {dados['localizacao']}')
+def demonstrar_produtos(): #função de desmontrar lista de produtos
+    if not produtos: 
+        print("Nenhum produto cadastrado!")
+        return
+    for codigo, dados in produtos.items():  
+        print(f'\nCódigo: {codigo}')
+        print(f'Nome: {dados['nome']}')
+        print(f'preco: {dados['preco']}')
+        print(f'quantidade: {dados['quantidade']}')
+        print(f'localizacao: {dados['localizacao']}')
 
 print('Bem vindo ao sistemas de gerenciamento de estoque!')
 while True: # Menu de escolhas para o usuário
@@ -36,8 +39,11 @@ while True: # Menu de escolhas para o usuário
     escolha = input('Escolha uma opção: ')
                
     if escolha == '1':
+        print("Cadastramento de produtos iniciado!!")
         cadastrar_produto()
-
+        
+    elif escolha == '2':
+        demonstrar_produtos()
 
     elif escolha == '4':
         print('Saindo do Sistema!')
