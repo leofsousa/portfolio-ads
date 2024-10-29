@@ -29,12 +29,42 @@ def demonstrar_produtos(): #função de desmontrar lista de produtos
         print(f'quantidade: {dados['quantidade']}')
         print(f'localizacao: {dados['localizacao']}')
 
+
+def alterar_quantidade():
+    codigo = input("Digite o código do produto que deseja alterar a quantidade: ")
+    if codigo in produtos:
+        nova_quantidade = int(input('Digite a nova quantidade: '))
+        produtos[codigo]["quantidade"] = nova_quantidade
+        print('Quantidade atualizada com sucesso!')
+    else:
+        print('Produto não encontrado!')
+
+
+def rastrear_produto():
+    codigo = input("Digite o código do produto que deseja rastrear: ")
+    if codigo in produtos:
+        print(f'A localização informada do objeto é: {produtos[codigo]["localizacao"]}')
+    else:
+        print('Produto não encontrado!')
+
+def remover_produto():
+    codigo = input("Digite o código do produto que deseja remover: ")
+    if codigo in produtos:
+        print('Removendo produto, aguarde!')
+        time.sleep(1)
+        del produtos[codigo]
+        print('Produto Removido com Sucesso!')
+    else:
+        print('Produto não encontrado.')
+
 print('Bem vindo ao sistemas de gerenciamento de estoque!')
 while True: # Menu de escolhas para o usuário
     print('1. Cadastrar Produto.')
     print('2. Visualizar Produtos Cadastrados.')
-    print('3. Remover Produto.')
-    print('4. Sair')
+    print('3. Alterar quantidade de produto cadastrado.')
+    print('4. Rastrear pronto dentro do depósito.')
+    print('5. Remover Produto.')
+    print('6. Sair')
 
     escolha = input('Escolha uma opção: ')
                
@@ -44,8 +74,17 @@ while True: # Menu de escolhas para o usuário
         
     elif escolha == '2':
         demonstrar_produtos()
+    
+    elif escolha == '3':
+        alterar_quantidade()
 
     elif escolha == '4':
+        rastrear_produto()
+
+    elif escolha == '5':
+        remover_produto()
+
+    elif escolha == '6':
         print('Saindo do Sistema!')
         print('Obrigado por utilizar!')
         break
