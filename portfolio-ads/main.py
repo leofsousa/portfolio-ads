@@ -1,4 +1,6 @@
 import time
+import datetime
+
 produtos = {}
 
 def cadastrar_produto(): #função de cadastramento de produtos.
@@ -61,6 +63,19 @@ def remover_produto():
     else:
         print('Produto não encontrado.')
 
+movimentacoes = []
+
+
+def registrar_movimentação(tipo, codigo, descricao):
+    data_hora = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    movimentacao = {
+        "tipo": tipo,
+        "codigo": codigo,
+        "descricao": descricao,
+        "data_hora": data_hora
+    }
+    movimentacoes.append(movimentacao)
+
 print('Bem vindo ao sistemas de gerenciamento de estoque!')
 while True: # Menu de escolhas para o usuário
     print('1. Cadastrar Produto.')
@@ -78,7 +93,7 @@ while True: # Menu de escolhas para o usuário
         
     elif escolha == '2':
         demonstrar_produtos()
-    
+        
     elif escolha == '3':
         alterar_quantidade()
 
