@@ -27,6 +27,7 @@ def demonstrar_produtos(): #função de desmontrar lista de produtos
         return
     for codigo, dados in produtos.items():  
         quantidade = produtos[codigo]['quantidade']
+        print("-" * 40)
         print(f'\nCódigo: {codigo}')
         print(f'Nome: {dados['nome']}')
         print(f'Preço: {dados['preco']}')
@@ -34,6 +35,7 @@ def demonstrar_produtos(): #função de desmontrar lista de produtos
         print(f'Localização: {dados['localizacao']}')
         if quantidade < 5:
             print('Estoque baixo! Menos de 5 itens.')
+        print("-" * 40)
 
 
 
@@ -107,15 +109,23 @@ while True: # Menu de escolhas para o usuário
         
     elif escolha == '2':
         demonstrar_produtos()
-        
+        cod = 0
+        registrar_movimentação("Solicitação", cod ,'Solicitou a Lista de Produtos' )
+
     elif escolha == '3':
         alterar_quantidade()
+        cod = cadastrar_produto()
+        registrar_movimentação("Alteração", cod , 'Alterou a quantidade do produto' )
 
     elif escolha == '4':
         rastrear_produto()
+        cod = cadastrar_produto()
+        registrar_movimentação("Rastreamento", cod , f'Rastreou o produto de código: {cod}')
 
     elif escolha == '5':
         remover_produto()
+        cod = cadastrar_produto()
+        registrar_movimentação("Remoção", cod , 'Removeu o produto' )
 
     elif escolha == '6':
         ver_movimentacao()
