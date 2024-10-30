@@ -1,5 +1,5 @@
 import time
-import datetime
+from datetime import datetime
 
 produtos = {}
 
@@ -7,7 +7,7 @@ def cadastrar_produto(): #função de cadastramento de produtos.
     codigo = input("Digite o código do produto: ")
     nome = input("Digite o nome do produto: ")
     preco = float(input("Digite o preço do produto: "))
-    quantidade = input("Digite a quantidade do produto: ")
+    quantidade = int(input("Digite a quantidade do produto: "))
     localizacao = input("Digite em qual parte do deposito o produto foi armazenado: ")
 
     produtos[codigo] = {
@@ -19,6 +19,7 @@ def cadastrar_produto(): #função de cadastramento de produtos.
     print('Cadastrando produto, aguarde!')
     time.sleep(1)
     print('Produto Cadastrado com sucesso!')
+    return codigo
 
 def demonstrar_produtos(): #função de desmontrar lista de produtos
     if not produtos: 
@@ -31,7 +32,7 @@ def demonstrar_produtos(): #função de desmontrar lista de produtos
         print(f'Preço: {dados['preco']}')
         print(f'Quantidade: {dados['quantidade']}')
         print(f'Localização: {dados['localizacao']}')
-        if quantidade < '5':
+        if quantidade < 5:
             print('Estoque baixo! Menos de 5 itens.')
 
 
@@ -67,7 +68,7 @@ movimentacoes = []
 
 
 def registrar_movimentação(tipo, codigo, descricao):
-    data_hora = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    data_hora = datetime.now().strftime("%m/%d/%Y, %H:%M:%S")
     movimentacao = {
         "tipo": tipo,
         "codigo": codigo,
@@ -76,6 +77,17 @@ def registrar_movimentação(tipo, codigo, descricao):
     }
     movimentacoes.append(movimentacao)
 
+def ver_movimentacao():
+    print("Histórico de Movimentações:")
+    for movimentacao in movimentacoes:
+        print("-" * 40)
+        print(f"Tipo:        {movimentacao['tipo']}")
+        print(f"Código:      {movimentacao['codigo']}")
+        print(f"Descrição:   {movimentacao['descricao']}")
+        print(f"Data e Hora: {movimentacao['data_hora']}")
+        print("-" * 40)
+
+
 print('Bem vindo ao sistemas de gerenciamento de estoque!')
 while True: # Menu de escolhas para o usuário
     print('1. Cadastrar Produto.')
@@ -83,13 +95,15 @@ while True: # Menu de escolhas para o usuário
     print('3. Alterar quantidade de produto cadastrado.')
     print('4. Rastrear pronto dentro do depósito.')
     print('5. Remover Produto.')
-    print('6. Sair')
+    print('6. Ver movimentações')
+    print('7. Sair')
 
     escolha = input('Escolha uma opção: ')
                
     if escolha == '1':
         print("Cadastramento de produtos iniciado!!")
-        cadastrar_produto()
+        cod = cadastrar_produto()
+        registrar_movimentação("Adição", cod , 'Adicionou o produto' )
         
     elif escolha == '2':
         demonstrar_produtos()
@@ -104,6 +118,9 @@ while True: # Menu de escolhas para o usuário
         remover_produto()
 
     elif escolha == '6':
+        ver_movimentacao()
+
+    elif escolha == '7':
         print('Saindo do Sistema!')
         print('Obrigado por utilizar!')
         break
