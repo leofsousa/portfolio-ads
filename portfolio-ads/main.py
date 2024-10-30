@@ -23,11 +23,15 @@ def demonstrar_produtos(): #função de desmontrar lista de produtos
         print("Nenhum produto cadastrado!")
         return
     for codigo, dados in produtos.items():  
+        quantidade = produtos[codigo]['quantidade']
         print(f'\nCódigo: {codigo}')
         print(f'Nome: {dados['nome']}')
-        print(f'preco: {dados['preco']}')
-        print(f'quantidade: {dados['quantidade']}')
-        print(f'localizacao: {dados['localizacao']}')
+        print(f'Preço: {dados['preco']}')
+        print(f'Quantidade: {dados['quantidade']}')
+        print(f'Localização: {dados['localizacao']}')
+        if quantidade < '5':
+            print('Estoque baixo! Menos de 5 itens.')
+
 
 
 def alterar_quantidade():
